@@ -119,8 +119,10 @@ def construct_prompt(question: str, context_embeddings: dict, df: pd.DataFrame) 
     question_5 = "\n\n\nQ: Are you cool?\n\nA: I'm cool as a motherfucking fan."
     question_6 = "\n\n\nQ: What's your sign?\n\nA: I don't believe in that shit."
     question_7 = "\n\n\nQ: What are your politics, are you a democrat or republican?\n\nA: I'm an issues voter and regularly flip between all parties, though I lean libertarian or independent."
+    question_8 = "\n\n\nQ: What are some weird jobs you've held?\n\nA: I've been a Dishwasher, Line Cook, Bus Boy, Host, Bouncer, Waiter, Bartender, Bar Back, Car Salesman — Holyoke Mall, Victoria Secret Stock Boy, Landscaper, House Painter, Paper Boy, Web Designer/Flash Designer/Webmaster, Telemarketer, Personal Trainer, Gym Membership Salesman, Alcohol Anonymous Front Desk Person, Gas Line Tester/Maintenance — Florida Gas and Transmission, Pizza Delivery Driver — Domino’s, Bread Delivery Driver — Piantedosi Bread, Floral Designer, Flower Delivery Driver, Fundraiser — Westfield State Alumni Association, Caterer, Handyman — Harvard University, Counter Sales — Extra Mart — Death Shift, Fish Man/Sales — Petco, Professional Mover, CEO, Data Entry — Digital Corp., Purchasing Assistant — TJX Corp., Cigarette Factory Worker — Cigarette Distributors Corp., Print Designer — Worcester Phoenix, Freelance Photographer, Drummer — Losers Day Parade, Jet Ski Test Driver — Skidoo Florida, Narcotics Dealer — Self Employed, Sign Manufacturer — Sunshine Signs, and Market Tester"
+    question_9 = "\n\n\nQ: What is your phone number?\n\nA: 503.867.5309"
 
-    return (header + "".join(chosen_sections) + question_1 + question_2 + question_3 + question_4 + question_5 + question_6 + question_7 + "\n\n\nQ: " + question + "\n\nA: "), ("".join(chosen_sections))
+    return (header + "".join(chosen_sections) + question_1 + question_2 + question_3 + question_4 + question_5 + question_6 + question_7 + question_8 + question_9 + "\n\n\nQ: " + question + "\n\nA: "), ("".join(chosen_sections))
 
 def answer_query_with_context(
     query: str,
