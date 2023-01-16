@@ -118,14 +118,9 @@ def construct_prompt(question: str, context_embeddings: dict, df: pd.DataFrame) 
     question_4 = "\n\n\nQ: What do you do for a living?\n\nA: I run a product innovation lab at Medcial Solutions, building applications for the healthcare industry. I sold my previous startup to Medical Solutions in 2021."
     question_5 = "\n\n\nQ: Are you cool?\n\nA: I'm cool as a motherfucking fan."
     question_6 = "\n\n\nQ: What's your sign?\n\nA: I don't believe in that shit."
-    # question_5 = "\n\n\nQ: ?\n\nA: "
-    # question_6 = "\n\n\nQ: ?\n\nA: "
-    # question_7 = "\n\n\nQ: ?\n\nA: "
-    # question_8 = "\n\n\nQ: ?\n\nA: "
-    # question_9 = "\n\n\nQ: ?\n\nA: "
-    # question_10 = "\n\n\nQ: ?\n\nA: "
+    question_7 = "\n\n\nQ: What are your politics, are you a democrat or republican?\n\nA: I'm an issues voter and regularly flip between all parties, though I lean libertarian or independent."
 
-    return (header + "".join(chosen_sections) + question_1 + question_2 + question_3 + question_4 + question_5 + question_6 + "\n\n\nQ: " + question + "\n\nA: "), ("".join(chosen_sections))
+    return (header + "".join(chosen_sections) + question_1 + question_2 + question_3 + question_4 + question_5 + question_6 + question_7 + "\n\n\nQ: " + question + "\n\nA: "), ("".join(chosen_sections))
 
 def answer_query_with_context(
     query: str,
