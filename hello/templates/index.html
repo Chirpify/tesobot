@@ -5,8 +5,8 @@
 
 <div class="header">
   <div class="logo">
-    <!-- <div style="text-align: center;"><img src="{% static 'mlab.png' %}" loading="lazy" /></div> -->
-    <h1>AI Recruiter</h1>
+    <div style="text-align: center;"><img src="{% static 'me.png' %}" loading="lazy" /></div>
+    <h1>How can I help you?</h1>
   </div>
 </div>
 
@@ -15,18 +15,18 @@
 
   <form action="/ask" method="post">
     {% csrf_token %}
-    <textarea name="question" id="question">{{ default_question }}</textarea>
+    <textarea name="question" style="background-color: #dcdcdc;" id="question">{{ default_question }}</textarea>
 
     <div class="buttons" {% if answer %}style="display: none"{% endif %}>
       <button type="submit" id="ask-button">Ask Me</button>
-      <!-- <button id="lucky-button" style="background: #eee; border-color: #eee; color: #444;" data>I'm feeling lucky</button> -->
+      <button id="lucky-button" class="hidden showing" style="background: #444; color: #dcdcdc;" data>Surprise Me</button>
     </div>
   </form>
 
   {% if answer %}
-    <p id="answer-container" class="hidden showing"><strong>Answer:</strong> <span id="answer">{{ answer }}</span><div class="buttonsagain"><button id="ask-another-button" style="display: block;">Ask another question</button></div><div id="nolikey" class="credits hidden showing" style="margin-top: 5px;color: #555;">Don't like my answer? <a onclick="location.href=this.href+'&body=This response was not good - '+window.location.href;return false;" href="mailto:chris.teso@medicalsolutions.com?subject=AI Response">Let me know</a>.</div></p>
+    <p id="answer-container" class="hidden showing"><strong>Answer:</strong> <span id="answer">{{ answer }}</span><div class="buttonsagain"><button id="ask-another-button" style="display: block;">Ask another question</button></div><div id="nolikey" class="credits hidden showing" style="margin-top: 5px;color: rgb(255, 243, 154);">Don't like my answer? <a onclick="location.href=this.href+'?text=@christeso this response was not good...'+window.location.href;return false;" href="https://twitter.com/intent/tweet">Let me know</a>.</div></p>
   {% else %}
-    <p id="answer-container" class="hidden"><strong>Answer:</strong> <span id="answer"></span><div class="buttonsagain"><button id="ask-another-button" style="display: none;">Ask another question</button></div><div id="nolikey" class="credits hidden" style="margin-top: 5px;color: #555;">Don't like my answer? <a onclick="location.href=this.href+'&body=This response was not good - '+window.location.href;return false;" href="mailto:chris.teso@medicalsolutions.com?subject=AI Response">Let me know</a>.</div></p>
+    <p id="answer-container" class="hidden"><strong>Answer:</strong> <span id="answer"></span><div class="buttonsagain"><button id="ask-another-button" style="display: none;">Ask another question</button></div><div id="nolikey" class="credits hidden" style="margin-top: 5px;color: rgb(255, 243, 154)">Don't like my answer? <a onclick="location.href=this.href+'?text=@christeso this response was not good...'+window.location.href;return false;" href="https://twitter.com/intent/tweet">Let me know</a>.</div></p>
   {% endif %}
 
   <audio id="audio" controls autoplay>
@@ -42,7 +42,7 @@
 
     var showText = function(target, message, index) {
       if (index < message.length) {
-        var interval = randomInteger(30, 70);
+        var interval = randomInteger(20, 60);
         $(target).append(message[index++]);
         setTimeout(function () { showText(target, message, index); }, interval);
       } else {
@@ -52,7 +52,16 @@
     }
 
     $("#lucky-button").click(function(e) {
-      var options = ["What is a minimalist entrepreneur?", "What is your definition of community?", "How do I decide what kind of business I should start?"],
+      var options = [
+      "Can you tell me a story about your life?",
+    "How old are you?",
+    "Are you married? What about kids?",
+    "What are some weird jobs you've held?",
+    "Do you have any advice for me on building applications?",
+    "What mountains have you climbed?",
+    "What makes you sad?",
+    "What are your politics? Are you a democrat, republican, libertarian, or other?",
+      ],
           random = ~~(Math.random() * options.length);
 
       $("textarea").val(options[random]);
@@ -62,6 +71,11 @@
       $(".buttons").show();
       document.getElementById('answer-container').classList.remove("showing");
       document.getElementById('nolikey').classList.remove("showing");
+      if (document.getElementById("question").value != "") {
+        document.getElementById('lucky-button').classList.remove("showing");
+      } else {
+        document.getElementById('lucky-button').classList.add("showing");
+      }
       clearTimeout(window.answerShower);
       document.getElementById('audio').pause();
       $("#ask-another-button").css("display", "none");
@@ -104,6 +118,7 @@
         answer.innerHTML = "";
         document.getElementById('answer-container').classList.add("showing");
         document.getElementById('nolikey').classList.add("showing");
+        // document.getElementById('answer-container').classList.add("showing");
 
         window.answerShower = setTimeout(function() {
           showText("#answer", data.answer, 0);
@@ -125,7 +140,11 @@
 </script>
 
 <footer>
-  <p class="credits">An MLab experiment using AI to talk with clinicians using Open AI ChatGPT API trained on Medical Solutions FAQs</p>
+  <p class="credits">An experiment to mimic myself using the <a href="https://openai.com/api/" target="_blank">OpenAI API</a> and a model I trained on my <a href="https://twitter.com/christeso" target="_blank">Tweets</a> <a href="https://www.linkedin.com/in/christeso/" target="_blank">LinkedIn</a> and <a href="https://medium.com/@christeso" target="_blank">Medium posts</a></p>
+  <p><a class="twitter-follow-button"
+    href="https://twitter.com/christeso">@ChrisTeso</a></p>
 </footer>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 {% endblock %}

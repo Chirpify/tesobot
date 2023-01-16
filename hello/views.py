@@ -112,18 +112,20 @@ def construct_prompt(question: str, context_embeddings: dict, df: pd.DataFrame) 
 
     header = """Please keep your answers to three sentences maximum, and speak in complete sentences.:\n"""
 
-    question_1 = "\n\n\nQ: How do I become a Traveler with Medical Solutions?\n\nA: Simply apply here. You can also call us at 1.866.633.3548 and speak with a recruiter, who can answer your questions and send you an information packet. All we need to begin is your application and resume. Once we receive your information, we can begin discussing potential assignments that fit your profile. When you find a job you want, your recruiter will submit you for the job and walk you through the process from there."
-    question_2 = "\n\n\nQ: Am I obligated to travel with Medical Solutions if I fill out an application?\n\nA:No. Your information is always kept confidential and we must get your permission before submitting your resume to a client. This gives you a chance to explore your options and choose the best assignment before signing a contract."
-    question_3 = "\n\n\nQ: Is there a fee to become a Traveler for Medical Solutions?\n\nA: Absolutely not. We’re paid by the hospital. If you choose to travel with Medical Solutions, you will become our employee and we pay you."
-    question_4 = "\n\n\nQ: Where can I find travel healthcare jobs and what jobs do you offer?\n\nA: Medical Solutions has open travel healthcare assignments nationwide in a variety of specialties and shifts. You can search our extensive database of travel healthcare positions by specialty, title, and location here. You can also sign up for our jobs email which sends you available jobs in your specialty."
-    question_5 = "\n\n\nQ: How long are travel healthcare assignments?\n\nA: Most assignments are 13 weeks in length, but we’ve seen them as short as four weeks and as long as 24. You are obligated to finish your assignment as contracted, but there is no contract binding you to work more assignments afterward. You can take a new assignment right after your last or take a break. It’s all up to you! How long does it take to get an assignment? Once you have interviewed for the position and both you and the facility decide to move forward, it typically takes one to six weeks, depending on when you are available and the start date of the assignment. We typically begin presenting new assignments to you about 30 days from the end of your current assignment."
-    question_6 = "\n\n\nQ: What about state licensing?\n\nA: Many states are in the Nurse Licensure Compact (NLC), which allows you reciprocal rights to practice in compact states. If you need to obtain a new state license, your Recruiter can tell you exactly how much time is necessary to apply for it and the cost. If a new license is required for your assignment, Medical Solutions will reimburse you for the cost!"
-    question_7 = "\n\n\nQ:What happens after my assignment is over?\n\nA: Before your assignment ends, your recruiter will begin discussing new travel opportunities with you. However, it is completely your choice to extend your assignment (if an extension is offered), take another assignment, go full time, or simply take a break. Get a jump on exploring new jobs here."
-    question_8 = "\n\n\nQ: What are the benefits of traveling vs a permanent position?\n\nA: Many travelers say the variety of travel jobs helps them avoid nurse burnout, plus it’s a great way to develop new skills and it looks great on your resume! Traveling is also exciting, especially if you’re flexible with your time, family, and social life. You often receive higher pay, paid lodging, preferred scheduling, and bonuses through your company’s loyalty program. Assignments are typically 13 weeks in duration, long enough to enjoy your new city and maybe even make a few friends, but not so long you get bored. This lifestyle is best suited to those who can easily adapt to new surroundings, are flexible with location, and confident in their clinical skills."
-    question_9 = "\n\n\nQ: What do I do if I get injured on the job?\n\nA: If you are injured at work and it is an emergency, call 911 or go to the nearest emergency room. If your injury is not an emergency, you must call Conduent at 844-975-3471 prior to seeking treatment. Conduent is a 24/7 injury triage service that provides immediate expertise from a registered nurse (RN) to accurately assess the severity of a workplace injury and recommend the best course of action. After coordinating a referral for medical treatment, Conduent will send a report of injury to us and we will file a workers’ compensation claim with our claim administrator, CCMSI. Our Work Comp team will provide you with your claim information and further instructions via email."
-    question_10 = "\n\n\nQ: How much will I be paid?\n\nA: Your total compensation package — including your hourly pay, benefits, bonuses, reimbursements, etc. — is completely customized to fit your needs. Pay rates vary from assignment to assignment depending on location, the hospital, your specialty, and other factors."
+    question_1 = "\n\n\nQ: Can you tell me about Chris Teso?\n\nA: I was born and raised in central Massachusettes in 1974. I was born with ehlers danlos syndrome and dislocated hips, and I had to wear a hip cast until I was 3 years old and could not walk. Eventually my joints became more hardened, and I went on to be a college athlete. I flucnked out of college, and moved to Florida for a short period to find myself. I moved back, switched my major to art, and graduated college in 1999. I taught myself programming and started building websites around the year 2000. I eventually became an entrepreneur and have started about 5 companies over the last 20 years."
+    question_2 = "\n\n\nQ: How old are you?\n\nA: I'm currently 49"
+    question_3 = "\n\n\nQ: What foods do you likle?\n\nA: I love sushi and ribeye steaks."
+    question_4 = "\n\n\nQ: What do you do for a living?\n\nA: I run a product innovation lab at Medcial Solutions, building applications for the healthcare industry. I sold my previous startup to Medical Solutions in 2021."
+    question_5 = "\n\n\nQ: Are you cool?\n\nA: I'm cool as a motherfucking fan."
+    question_6 = "\n\n\nQ: What's your sign?\n\nA: I don't believe in that shit."
+    # question_5 = "\n\n\nQ: ?\n\nA: "
+    # question_6 = "\n\n\nQ: ?\n\nA: "
+    # question_7 = "\n\n\nQ: ?\n\nA: "
+    # question_8 = "\n\n\nQ: ?\n\nA: "
+    # question_9 = "\n\n\nQ: ?\n\nA: "
+    # question_10 = "\n\n\nQ: ?\n\nA: "
 
-    return (header + "".join(chosen_sections) + question_1 + question_2 + question_3 + question_4 + question_5 + question_6 + question_7 + question_8 + question_9 + question_10 + "\n\n\nQ: " + question + "\n\nA: "), ("".join(chosen_sections))
+    return (header + "".join(chosen_sections) + question_1 + question_2 + question_3 + question_4 + question_5 + question_6 + "\n\n\nQ: " + question + "\n\nA: "), ("".join(chosen_sections))
 
 def answer_query_with_context(
     query: str,
@@ -164,8 +166,8 @@ def ask(request):
         previous_question.save()
         return JsonResponse({ "question": previous_question.question, "answer": previous_question.answer, "audio_src_url": audio_src_url, "id": previous_question.pk })
 
-    df = pd.read_csv('Embeddings.pdf.pages.csv')
-    document_embeddings = load_embeddings('Embeddings.pdf.embeddings.csv')
+    df = pd.read_csv('tesobotembeddings.pdf.pages.csv')
+    document_embeddings = load_embeddings('tesobotembeddings.pdf.embeddings.csv')
     answer, context = answer_query_with_context(question_asked, df, document_embeddings)
 
     # project_uuid = '7ac56bc3'
