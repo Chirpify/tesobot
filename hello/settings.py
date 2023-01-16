@@ -30,7 +30,7 @@ else:
 if not IS_HEROKU:
     DEBUG = True
 
-CSRF_TRUSTED_ORIGINS = ["https://tesobot.herokuapp.com/", "http://127.0.0.1:5001"]
+CSRF_TRUSTED_ORIGINS = ["https://tesobot.herokuapp.com/", "https://tesobot.com/", "http://127.0.0.1:5001"]
 
 # Application definition
 
