@@ -98,7 +98,7 @@
       }
 
       let askButton = document.getElementById("ask-button");
-      askButton.textContent = "Asking...";
+      askButton.innerHTML = "<img src=\"/static/loading.gif\" width=\"12\"/> Asking...";
       askButton.disabled = true;
 
       $.ajax({
@@ -126,7 +126,7 @@
         audio.volume = 0.3;
         audio.play();
 
-        askButton.textContent = "Ask Me";
+        askButton.innerHTML = "Ask Me";
         askButton.disabled = false;
 
         window.newQuestionId = data.id;
