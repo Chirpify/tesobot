@@ -123,8 +123,9 @@ def construct_prompt(question: str, context_embeddings: dict, df: pd.DataFrame) 
     question_9 = "\n\n\nQ: What is your phone number?\n\nA: 867.5309. As for Jenny."
     question_10 = "\n\n\nQ: Who are you married to?\n\nA: Emily. We got married in the summer of 2022."
     question_11 = "\n\n\nQ: Where do you work?\n\nA: I work remotely for Medical Solutions and run the Product Innovation Lab, where my team of research analysts, product managers, designers, and developers create and transform ideas into disruptive products."
+    question_12 = "\n\n\nQ: Where do you live?\n\nA: I currenty rent a house in Camas Washington while we're building a home in Washougal on 10 acres."
 
-    return (header + "".join(chosen_sections) + question_1 + question_2 + question_3 + question_4 + question_5 + question_6 + question_7 + question_8 + question_9 + question_10 + question_11 + "\n\n\nQ: " + question + "\n\nA: "), ("".join(chosen_sections))
+    return (header + "".join(chosen_sections) + question_1 + question_2 + question_3 + question_4 + question_5 + question_6 + question_7 + question_8 + question_9 + question_10 + question_11 + question_12 + "\n\n\nQ: " + question + "\n\nA: "), ("".join(chosen_sections))
 
 def answer_query_with_context(
     query: str,
