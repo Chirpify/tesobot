@@ -2,18 +2,19 @@
 {% load static %}
 
 {% block content %}
-
-<h2>{{ answered_questions_count }}/500 questions answered</h2>
+<div class="main">
+<h1>{{ answered_questions_count }}/500 questions answered</h1>
 
 <ul class="queue">
   {% for question in questions %}
+
       <li>
-        <strong>{{ question.question }}</strong>
+        <strong>{{ question.question }} {{ question.date }}</strong>
         <p>{{ question.answer }}</p>
 
         <p><small>Asked {{ question.ask_count }} times</small></p>
       </li>
   {% endfor %}
 </ul>
-
+</div>
 {% endblock %}

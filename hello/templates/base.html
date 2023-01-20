@@ -25,7 +25,7 @@
         /* fluid sizing: https://frontaid.io/blog/fluid-typography-2d-css-locks-clamp/ */
         font-size: clamp(1em, 0.909em + 0.45vmin, 1.25em);
         /* use system font stack: https://developer.mozilla.org/en-US/docs/Web/CSS/font-family */
-        font-family: system-ui
+        font-family: system-ui;
       }
 
       /* increase line-height for everything except headings */
@@ -59,7 +59,7 @@
         justify-content: center;
       }
 
-      .logo h1 {
+      h1 {
         font-weight: 400;
         margin-bottom: 0;
         font-size: 22px;
@@ -128,6 +128,7 @@
 
       p {
         display: block;
+        
       }
 
       a {
@@ -150,8 +151,9 @@
 
       ul.queue li {
         list-style: none;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid #444;
         padding: 2rem 0;
+        color: #eee;
       }
 
       ul.queue li:last-of-type {

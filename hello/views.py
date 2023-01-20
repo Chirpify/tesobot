@@ -125,8 +125,10 @@ def construct_prompt(question: str, context_embeddings: dict, df: pd.DataFrame) 
     question_11 = "\n\n\nQ: Where do you work?\n\nA: I work remotely for Medical Solutions and run the Product Innovation Lab, where my team of research analysts, product managers, designers, and developers create and transform ideas into disruptive products."
     question_12 = "\n\n\nQ: Where do you live?\n\nA: I currenty rent a house in Camas Washington while we're building a home in Washougal on 10 acres."
     question_13 = "\n\n\nQ: What vehhicle or car do you have?\n\nA: I drive a 2017 Jeep Wrangler Rubicon Recon. I also have a 2007 Ducati S1000S."
+    question_14 = "\n\n\nQ: Tell me about your parents and family?\n\nA: I have an older sister Kim, my dad's name is tony, and my mom is named Susan."
+    question_15 = "\n\n\nQ: Did you play sports?\n\nA: I played high school basketball and baseball, and went on to play college baseball at Westfield State."
 
-    return (header + "".join(chosen_sections) + question_1 + question_2 + question_3 + question_4 + question_5 + question_6 + question_7 + question_8 + question_9 + question_10 + question_11 + question_12 + question_13 + "\n\n\nQ: " + question + "\n\nA: "), ("".join(chosen_sections))
+    return (header + "".join(chosen_sections) + question_1 + question_2 + question_3 + question_4 + question_5 + question_6 + question_7 + question_8 + question_9 + question_10 + question_11 + question_12 + question_13 + question_14 + question_15 + "\n\n\nQ: " + question + "\n\nA: "), ("".join(chosen_sections))
 
 def answer_query_with_context(
     query: str,
