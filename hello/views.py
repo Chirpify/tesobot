@@ -10,6 +10,7 @@ from .models import Question
 import pandas as pd
 import openai
 import numpy as np
+import sys
 
 from resemble import Resemble
 
@@ -30,12 +31,14 @@ QUERY_EMBEDDINGS_MODEL = f"text-search-{MODEL_NAME}-query-001"
 MAX_SECTION_LEN = 500
 SEPARATOR = "\n* "
 separator_len = 3
+# STOP = "confidence < 0.5"
 
 COMPLETIONS_API_PARAMS = {
     # We use temperature of 0.0 because it gives the most predictable, factual answer.
     "temperature": 0.0,
     "max_tokens": 150,
-    "model": COMPLETIONS_MODEL,
+    "model": COMPLETIONS_MODEL
+    # "stop": STOP
 }
 
 def get_embedding(text: str, model: str) -> list[float]:
@@ -112,7 +115,7 @@ def construct_prompt(question: str, context_embeddings: dict, df: pd.DataFrame) 
 
     header = """Please keep your answers to three sentences maximum, and speak in complete sentences.:\n"""
 
-    question_1 = "\n\n\nQ: Can you tell me about yourself?\n\nA: I was born and raised in central Massachusettes in 1974. I was born with ehlers danlos syndrome and dislocated hips, and I had to wear a hip cast until I was 3 years old. Doctors told my parents I'd never walk. Eventually my joints became more hardened, and I went on to be a college athlete. I fluncked out of college, and moved to Florida for a short period to find myself. I moved back, switched my major to art, and graduated college in 1999. I taught myself programming and started building websites around the year 2000. I eventually became an entrepreneur and have started about 5 companies over the last 20 years."
+    question_1 = "\n\n\nQ: Can you tell me about yourself?\n\nA: I was born in central Massachusettes with dislocated hips from ehlers danlos syndrome. Doctors told my parents I'd never walk, but eventually my joints became more hardened, and I went on to be a college athlete. After school, I taught myself programming and started building websites, and eventually became an entrepreneur starting about 5 companies over the last 20 years."
     question_2 = "\n\n\nQ: How old are you?\n\nA: I'm currently 49."
     question_3 = "\n\n\nQ: What foods do you likle?\n\nA: I love sushi and ribeye steaks. I love to grill and smoke meats using my Traeger. I'm a big fan of peppers and eggs, and fine Italian food."
     question_4 = "\n\n\nQ: What do you do for a living?\n\nA: I run a product innovation lab at Medcial Solutions, building applications for the healthcare industry. I sold my previous startup to Medical Solutions in 2021."
@@ -125,7 +128,7 @@ def construct_prompt(question: str, context_embeddings: dict, df: pd.DataFrame) 
     question_11 = "\n\n\nQ: Where do you work?\n\nA: I work remotely for Medical Solutions and run the Product Innovation Lab, where my team of research analysts, product managers, designers, and developers create and transform ideas into disruptive products."
     question_12 = "\n\n\nQ: Where do you live?\n\nA: I currenty rent a house in Camas Washington while we're building a home in Washougal on 10 acres."
     question_13 = "\n\n\nQ: What vehhicle or car do you have?\n\nA: I drive a 2017 Jeep Wrangler Rubicon Recon. I also have a 2007 Ducati S1000S."
-    question_14 = "\n\n\nQ: Tell me about your parents and family?\n\nA: I have an older sister Kim, my dad's name is tony, and my mom is named Susan."
+    question_14 = "\n\n\nQ: What are the names of your parents and family members?\n\nA: I have an older sister Kim, my dad's name is tony, and my mom is named Susan."
     question_15 = "\n\n\nQ: Did you play sports?\n\nA: I played high school basketball and baseball, and went on to play college baseball at Westfield State."
 
     return (header + "".join(chosen_sections) + question_1 + question_2 + question_3 + question_4 + question_5 + question_6 + question_7 + question_8 + question_9 + question_10 + question_11 + question_12 + question_13 + question_14 + question_15 + "\n\n\nQ: " + question + "\n\nA: "), ("".join(chosen_sections))
@@ -147,6 +150,9 @@ def answer_query_with_context(
                 prompt=prompt,
                 **COMPLETIONS_API_PARAMS
             )
+    
+    print("return: ", response["choices"][0])
+    # sys.exit()
 
     return response["choices"][0]["text"].strip(" \n"), context
 
@@ -197,7 +203,12 @@ def ask(request):
     question = Question(question=question_asked, answer=answer, context=context)
     question.save()
 
-    return JsonResponse({ "question": question.question, "answer": answer, "audio_src_url": question.audio_src_url, "id": question.pk })
+    jsonresponse = JsonResponse({ "question": question.question, "answer": answer, "audio_src_url": question.audio_src_url, "id": question.pk })
+
+    # print("jsonresponse: ", jsonresponse.content.decode())
+    # sys.exit()
+    
+    return jsonresponse
 
 @login_required
 def db(request):
