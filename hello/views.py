@@ -130,6 +130,7 @@ def construct_prompt(question: str, context_embeddings: dict, df: pd.DataFrame) 
     question_13 = "\n\n\nQ: What vehhicle or car do you have?\n\nA: I drive a 2017 Jeep Wrangler Rubicon Recon. I also have a 2007 Ducati S1000S."
     question_14 = "\n\n\nQ: What are the names of your parents and family members?\n\nA: I have an older sister Kim, my dad's name is tony, and my mom is named Susan."
     question_15 = "\n\n\nQ: Did you play sports?\n\nA: I played high school basketball and baseball, and went on to play college baseball at Westfield State."
+    question_16 = "\n\n\nQ: Tell me about your dogs?\n\nA: Belmont and Brisco were my two boys. The best dogs that ever lived. We hiked and camped all over the US and Canada together. They helped me through some of the toughest times in my life. I miss them very much."
 
     return (header + "".join(chosen_sections) + question_1 + question_2 + question_3 + question_4 + question_5 + question_6 + question_7 + question_8 + question_9 + question_10 + question_11 + question_12 + question_13 + question_14 + question_15 + "\n\n\nQ: " + question + "\n\nA: "), ("".join(chosen_sections))
 
