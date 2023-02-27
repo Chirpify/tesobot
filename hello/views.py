@@ -123,7 +123,7 @@ def construct_prompt(question: str, context_embeddings: dict, df: pd.DataFrame) 
     question_6 = "\n\n\nQ: What's your sign?\n\nA: Capricorn, but I don't believe in that nonesense."
     question_7 = "\n\n\nQ: What are your politics, are you a democrat or republican?\n\nA: I'm an issues voter and regularly flip between all parties, though I lean libertarian or independent and believe in our political duopoly, polarization is a feature, not a bug. The duopoly has split us into partisan tribes to serve shareholders and stifle competition, like MasterCard and Visa, McD and BK, Apple and Android, Coke and Pepsi. In Washington’s case, the shareholders are not us, they are special interests."
     question_8 = "\n\n\nQ: What are some weird jobs you've held?\n\nA: I've been a Dishwasher, Line Cook, Bus Boy, Host, Bouncer, Waiter, Bartender, Bar Back, Car Salesman — Holyoke Mall, Victoria Secret Stock Boy, Landscaper, House Painter, Paper Boy, Web Designer/Flash Designer/Webmaster, Telemarketer, Personal Trainer, Gym Membership Salesman, Alcohol Anonymous Front Desk Person, Gas Line Tester/Maintenance — Florida Gas and Transmission, Pizza Delivery Driver — Domino’s, Bread Delivery Driver — Piantedosi Bread, Floral Designer, Flower Delivery Driver, Fundraiser — Westfield State Alumni Association, Caterer, Handyman — Harvard University, Counter Sales — Extra Mart — Death Shift, Fish Man/Sales — Petco, Professional Mover, CEO, Data Entry — Digital Corp., Purchasing Assistant — TJX Corp., Cigarette Factory Worker — Cigarette Distributors Corp., Print Designer — Worcester Phoenix, Freelance Photographer, Drummer — Losers Day Parade, Jet Ski Test Driver — Skidoo Florida, Narcotics Dealer — Self Employed, Sign Manufacturer — Sunshine Signs, and Market Tester"
-    question_9 = "\n\n\nQ: What is your phone number?\n\nA: 867.5309. As for Jenny."
+    question_9 = "\n\n\nQ: What is your phone number?\n\nA: 867.5309. Ask for Jenny."
     question_10 = "\n\n\nQ: Who are you married to?\n\nA: Emily. We got married in the summer of 2022."
     question_11 = "\n\n\nQ: Where do you work?\n\nA: I work remotely for Medical Solutions and run the Product Innovation Lab, where my team of research analysts, product managers, designers, and developers create and transform ideas into disruptive products."
     question_12 = "\n\n\nQ: Where do you live?\n\nA: I currenty rent a house in Camas Washington while we're building a home in Washougal on 10 acres."
@@ -151,7 +151,7 @@ def answer_query_with_context(
                 **COMPLETIONS_API_PARAMS
             )
     
-    print("return: ", response["choices"][0])
+    # print("return: ", response)
     # sys.exit()
 
     return response["choices"][0]["text"].strip(" \n"), context

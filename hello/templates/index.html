@@ -5,7 +5,7 @@
 
 <div class="header">
   <div class="logo">
-    <div style="text-align: center;"><a href="/"><img src="{% static 'me.png' %}" loading="lazy" /></a></div>
+    <div style="text-align: center;"><a href="/"><img src="{% static 'me-small.png' %}" loading="lazy" /></a></div>
     <h1>Hi, I'm Chris's AI. How can I help you?</h1>
   </div>
 </div>
@@ -109,7 +109,7 @@
 
     var showText = function(target, message, index) {
       if (index < message.length) {
-        var interval = randomInteger(20, 60);
+        var interval = randomInteger(10, 30);
         $(target).append(message[index++]);
         setTimeout(function () { showText(target, message, index); }, interval);
       } else {
@@ -121,11 +121,11 @@
     $("#lucky-button").click(function(e) {
       var options = [
       "Can you tell me a story about your life?",
-    "Are you married? What about kids?",
-    "What are some weird jobs you've held?",
-    "What are your politics? Are you a democrat, republican, or other?",
-    "What do you like to do for fun?",
-    "How would you solve the homeless problem?"
+      "Are you married? What about kids?",
+      "What are some weird jobs you've held?",
+      "What are your politics? Are you a democrat, republican, or other?",
+      "What do you like to do for fun?",
+      "How would you solve the homeless problem?"
       ],
           random = ~~(Math.random() * options.length);
 
