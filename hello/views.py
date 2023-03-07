@@ -35,7 +35,7 @@ separator_len = 3
 
 COMPLETIONS_API_PARAMS = {
     # We use temperature of 0.0 because it gives the most predictable, factual answer.
-    "temperature": 0.0,
+    "temperature": 0.7,
     "max_tokens": 150,
     "model": COMPLETIONS_MODEL
     # "stop": STOP
